@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo-microservice
+  labels:
+    app: demo-microservice
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: demo-microservice
+  template:
+    metadata:
+      labels:
+        app: demo-microservice
+    spec:
+      containers:
+      - name: web
+        image: nginx:1.25-alpine
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            cpu: "250m"
+            memory: "256Mi"
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
